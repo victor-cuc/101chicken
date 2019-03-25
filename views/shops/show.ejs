@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+
+<div class="ui container">
+  <div class="ui segments">
+    <div class="ui placeholder segment">
+      <div class="ui stackable grid">
+        <div class="ui vertical hidden divider"></div>
+        <div class="eleven wide column">
+          <div class="ui fluid image">
+            <img src="<%= shop.image %>">
+          </div>
+        </div>
+        <div class="five wide column">
+          <h2>Description</h2>
+          <p><%= shop.description %></p>
+        </div>
+      </div>
+    </div>
+    <div class="ui segment">
+      <h2>Ratings</h2>
+      <% shop.reviews.forEach((review) => { %>
+        <strong>
+          <p><%= review.author %></p>
+        </strong>
+        <p><%= review.text %></p>
+      <% }); %>
+    </div>
+  </div>
+</div>
+
+
+<% include ../partials/footer %>

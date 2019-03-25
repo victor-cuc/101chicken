@@ -1,5 +1,39 @@
 <% include ../partials/header %>
-
-<h1>Shop index</h1>
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+      <i class="map pin icon"></i>
+      <div class="content">
+        Shops
+        <div class="sub header">Check out our shops</div>
+      </div>
+    </h2>
+    <div align="center">
+      <a href="/shops/new" class="ui green basic animated mini fade circular button" tabindex="0">
+        <div class="hidden content">Add new shop</div>
+        <div class="visible content">
+          <i class="plus huge icon"></i>
+        </div>
+      </a>
+    </div>
+    <div class="ui divider"></div>
+  <div class="ui three column doubling grid">
+    <% shops.forEach((shop) => { %>
+      <div class="column">
+        <div class="ui fluid card">
+          <a class="image" href="/shops/<%= shop._id %>">
+            <img src="<%= shop.image %>">
+          </a>
+          <div class="content">
+            <div class="header" href="/shops/<%= shop._id %>"><%= shop.name %></div>
+            <div class="description"><%= shop.description.slice(0, 90) %>...</div>
+          </div>
+          <div class="extra content">
+            <a class="ui button" href="/shops/<%= shop._id %>">View Shop</a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
 
 <% include ../partials/footer %>

@@ -4,6 +4,7 @@ const shopSchema = new mongoose.Schema({
   name: String,
   image: String,
   description: String,
+  address: String,
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -11,12 +12,12 @@ const shopSchema = new mongoose.Schema({
     },
     username: String
   },
-  comments: [
+  reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment"
+      ref: "Review"
     }
   ]
-})
+});
 
 module.exports = mongoose.model("Shop", shopSchema);

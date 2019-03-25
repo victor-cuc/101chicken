@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const commentSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
   text: String,
+  rating: Number,
   // TODO: to be changed and made a User object
   author: String,
 });
 
-module.exports = mongoose.model("Comment", commentSchema);
+module.exports = mongoose.model("Review", reviewSchema);
