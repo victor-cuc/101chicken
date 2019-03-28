@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 //NEW FORM
 router.get("/new", (req, res) => {
-  res.send("new form");
+  res.render("shops/new");
 });
 
 //SHOW
