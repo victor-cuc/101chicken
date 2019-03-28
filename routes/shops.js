@@ -18,6 +18,18 @@ router.get("/new", (req, res) => {
   res.render("shops/new");
 });
 
+router.post("/", (req, res) => {
+	Shop.create(req.body.shop, (err, createdShop) => {
+		if (err) {
+			console.log(err);
+			res.redirect("back");
+		} else {
+			console.log("User added new shop: " + createdShop.name);
+			res.redirect("/shops");
+		}
+	});
+});
+
 //SHOW
 router.get('/:id', (req, res) => {
 	Shop.findById(req.params.id).populate("reviews").exec((err, foundShop) => {
