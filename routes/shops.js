@@ -1,5 +1,6 @@
 const express = require('express'),
 	Shop = require('../models/shop'),
+	Review = require('../models/review'),
 	router = express.Router();
 
 //INDEX
@@ -18,7 +19,9 @@ router.get("/new", (req, res) => {
   res.render("shops/new");
 });
 
+//CREATE
 router.post("/", (req, res) => {
+	req.body.shop.description = req.sanitize(req.body.shop.description);
 	Shop.create(req.body.shop, (err, createdShop) => {
 		if (err) {
 			console.log(err);
@@ -26,6 +29,26 @@ router.post("/", (req, res) => {
 		} else {
 			console.log("User added new shop: " + createdShop.name);
 			res.redirect("/shops");
+		}
+	});
+});
+
+//DELETE
+router.delete("/:id", (req, res) => {
+	Shop.findByIdAndDelete(req.params.id, (err, deletedShop) => {
+		if (err) {
+			console.log(err);
+			res.redirect("back");
+		} else {
+			console.log("Deleted: " + deletedShop.name);
+			Review.deleteMany({ _id: { $in: deletedShop.reviews } }, (err) => {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log("Deleted all comments on shop as well");
+				}
+			});
+			res.redirect('/shops');
 		}
 	});
 });

@@ -35,16 +35,17 @@ var data = [
 ];
 
 function seedDB() {
+	console.log("Starting to seed DB...")
 	Shop.deleteMany({}, (err) => {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log('Deleted Shops');
+			console.log('Deleted ALL Shops');
 			Review.deleteMany({}, (err) => {
 				if (err) {
 					console.log(err);
 				} else {
-          console.log("Deleted reviews");
+          console.log("Deleted ALL reviews");
 					data.forEach((seed) => {
 						Shop.create(seed, (err, shop) => {
 							if (err) {
