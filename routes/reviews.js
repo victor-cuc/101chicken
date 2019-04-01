@@ -3,14 +3,21 @@ const express = require("express"),
       Review = require("../models/review"),
       router = express.Router({mergeParams: true});
 
-router.post("/", (req, res) => {
-  console.log(req.params.id);
+router.post("/", isLoggedIn, (req, res) => {
   Shop.findById(req.params.id, (err, foundShop) => {
     if (err) {
       console.log(err);
       res.redirect("/shops");
     } else {
-      Review.create(req.body.comment, (err, createdReview) => {
+      const review = {
+        text: req.body.text,
+        rating: req.body.rating,
+        author: {
+          id: req.user.id,
+          username: req.user.username
+        }
+      };
+      Review.create(review, (err, createdReview) => {
         if (err) {
           console.log(err);
           res.redirect("back")
@@ -23,5 +30,12 @@ router.post("/", (req, res) => {
     }
   })
 });
+
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/login');
+}
 
 module.exports = router;

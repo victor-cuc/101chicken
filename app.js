@@ -4,7 +4,10 @@ const express = require('express'),
 	app = express(),
 	methodOverride = require('method-override'),
 	expressSanitizer = require("express-sanitizer"),
-	seedDB = require('./seeds');
+	seedDB = require('./seeds'),
+	passport = require("passport"),
+	LocalStrategy = require("passport-local"),
+	User = require("./models/user");
 
 const indexRoutes = require('./routes/index'),
 	reviewRoutes = require('./routes/reviews'),
@@ -17,7 +20,26 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 app.use(expressSanitizer());
 
-seedDB();
+app.use(
+	require("express-session")({
+		secret: "Secret String",
+		resave: false,
+		saveUninitialized: false
+	})
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+	res.locals.currentUser = req.user;
+	next();
+});
+
+//seedDB();
 
 app.use(indexRoutes);
 app.use('/shops', shopRoutes);

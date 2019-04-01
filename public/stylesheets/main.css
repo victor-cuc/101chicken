@@ -1,0 +1,7 @@
+#registration-page .column {
+  max-width: 450px;
+}
+
+.grid#registration-page {
+  height: 80%;
+}

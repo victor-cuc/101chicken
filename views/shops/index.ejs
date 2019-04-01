@@ -25,7 +25,7 @@
           </a>
           <div class="content">
             <div class="header" href="/shops/<%= shop._id %>"><%= shop.name %></div>
-            <div class="description"><%- shop.description.slice(0, 90) %>...</div>
+            <div class="description"><%= shop.description.slice(0, 90) %>...</div>
           </div>
           <div class="extra content">
             <a class="ui button" href="/shops/<%= shop._id %>">View Shop</a>

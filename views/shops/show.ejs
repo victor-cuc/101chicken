@@ -13,20 +13,23 @@
         </div>
         <div class="four wide column">
           <h2>Description</h2>
-          <p><%= shop.description %></p>
-          <form action="/shops/<%= shop._id %>?_method=DELETE" method="post">
-            <button class="ui red button">Delete</button>
-          </form>
+          <p><em>Added by: <strong><%= shop.author.username %></strong></em></p>
+          <p><%- shop.description %></p>
+          <% if (currentUser && shop.author.id.equals(currentUser.id)) { %>
+            <form action="/shops/<%= shop._id %>?_method=DELETE" method="post">
+              <button class="ui red button">Delete</button>
+            </form>
+          <% } %>
         </div>
       </div>
     </div>
     <div class="ui segment">
       <div class="ui comments">
-        <h2 class="ui dividing header">Ratings</h2>
+        <h2 class="ui dividing header">Reviews</h2>
         <% shop.reviews.forEach((review) => { %>
           <div class="comment">
             <div class="content">
-              <a class="author"><%= review.author %></a>
+              <a class="author"><%= review.author.username %></a>
               <div class="metadata">
                 <div class="rating">
                   <% for (var i=0; i < review.rating; i++) { %>
@@ -38,11 +41,21 @@
             </div>
           </div>
         <% }); %>
+        <div class="ui divider"></div>
         <form class="ui reply form" action="/shops/<%= shop._id %>/reviews" method="POST">
           <div class="field">
-            <textarea name="comment[text]"></textarea>
+            <div class="ui massive star rating" data-max-rating="5"></div>
+            <input type="hidden" name="rating" id="rating-value">
           </div>
-          <button class="ui blue labeled submit icon button">
+          <div class="field">
+            <textarea name="text" required></textarea>
+            <% if (currentUser) { %>
+              <p>Posting review as: <em><%= currentUser.username %></em></p>
+            <% } else { %>
+              <p><a href="/register">Sign Up</a> or <a href="/login">Log In</a> to comment</p>
+            <% } %>
+          </div>
+          <button class="ui blue labeled submit icon button" id="submit-button">
             <i class="icon edit"></i> Add Reply
           </button>
         </form>
@@ -51,5 +64,5 @@
   </div>
 </div>
 
-
+<script src="/scripts/ratings.js"></script>
 <% include ../partials/footer %>

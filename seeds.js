@@ -46,32 +46,32 @@ function seedDB() {
 					console.log(err);
 				} else {
           console.log("Deleted ALL reviews");
-					data.forEach((seed) => {
-						Shop.create(seed, (err, shop) => {
-							if (err) {
-								console.log(err);
-							} else {
-								console.log('Added shop: ' + shop.name);
+					// data.forEach((seed) => {
+					// 	Shop.create(seed, (err, shop) => {
+					// 		if (err) {
+					// 			console.log(err);
+					// 		} else {
+					// 			console.log('Added shop: ' + shop.name);
 
-								Review.create(
-									{
-										text: "Just great! Sanitary and healthy!",
-										rating: 4,
-										author: 'Paul Gasca'
-									},
-									(err, review) => {
-										if (err) {
-											console.log(err);
-										} else {
-											shop.reviews.push(review);
-											shop.save();
-											console.log("Reviewed '" + review.text + "' on '" + shop.name + "'");
-										}
-									}
-								);
-							}
-						});
-					});
+					// 			Review.create(
+					// 				{
+					// 					text: "Just great! Sanitary and healthy!",
+					// 					rating: 4,
+					// 					author: 'Paul Gasca'
+					// 				},
+					// 				(err, review) => {
+					// 					if (err) {
+					// 						console.log(err);
+					// 					} else {
+					// 						shop.reviews.push(review);
+					// 						shop.save();
+					// 						console.log("Reviewed '" + review.text + "' on '" + shop.name + "'");
+					// 					}
+					// 				}
+					// 			);
+					// 		}
+					// 	});
+					// });
 				}
 			});
 		}

@@ -1,0 +1,36 @@
+<% include partials/header %>
+
+<div class="ui middle aligned center aligned grid" id="registration-page">
+  <div class="column">
+    <h1 class="ui red header">
+        Create a new account
+    </h1>
+    <br>
+    <form class="ui large form segment" action="/register" method="POST" id="registration-form">
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="user icon"></i>
+          <input type="text" name="username" placeholder="Username">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="lock icon"></i>
+          <input type="password" name="password" placeholder="Password">
+        </div>
+      </div>
+      <div class="ui fluid large red submit button">Register</div>
+
+      <div class="ui error message"></div>
+
+    </form>
+
+    <div class="ui message">
+      Already have an account? <a href="/login">Log In</a>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/signup.js"></script>
+
+<% include partials/footer %>

@@ -3,21 +3,31 @@
   <head>
     <title>101Chicken</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI=" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <div class="red ui menu">
+    <div class="red ui menu" id="nav">
       <div class="header item">
         <i class="utensils icon"></i> 101Chicken
       </div>
-      <a class="active item" href="/">
+      <a class=" item" href="/" id="home">
         <i class="home icon"></i> Home
       </a>
-      <a class="item" href="/shops">
+      <a class="item" href="/shops" id="shops">
         <i class="map pin icon"></i> Shops
       </a>
       <div class="right menu">
-          <a class="ui item">Sign Up</a>
-          <a class="ui item">Log In</a>
+        <% if (!currentUser) { %>
+          <a class="ui item" href="/register" id="register">Sign Up</a>
+          <a class="ui item" href="/login" id="login">Log In</a>
+        <% } else { %>
+          <a class="ui item" href="/logout" id='logout'>Log Out</a>
+        <% } %>
       </div>
     </div>
