@@ -13,7 +13,10 @@ const indexRoutes = require('./routes/index'),
 	reviewRoutes = require('./routes/reviews'),
 	shopRoutes = require('./routes/shops');
 
-mongoose.connect('mongodb://localhost:27017/101chicken', { useNewUrlParser: true });
+mongoose.connect('mongodb://heroku_5dbjr6bk:62gmj6o1g2ldlr3l96pdffd0a7@ds229826.mlab.com:29826/heroku_5dbjr6bk', { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
