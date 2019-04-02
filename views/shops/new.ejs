@@ -9,11 +9,11 @@
       <form class="ui form" action="/shops" method="post">
         <div class="field">
           <label for="name">Name</label>
-          <input type="text" name="shop[name]" id="name" placeholder="Name">
+          <input type="text" name="shop[name]" id="name" placeholder="Name" required>
         </div>
         <div class="field">
           <label for="description">Description</label>
-          <textarea type="text" name="shop[description]" id="description" placeholder="Description" rows="3"></textarea>
+          <textarea type="text" name="shop[description]" id="description" placeholder="Description" rows="3" required></textarea>
         </div>
         <div class="field">
           <label for="address">Address</label>
@@ -21,7 +21,7 @@
         </div>
         <div class="field">
           <label for="image">Image link</label>
-          <input type="text" name="shop[image]" id="image" placeholder="Image Link">
+          <input type="text" name="shop[image]" id="image" placeholder="Image Link" required>
         </div>
         <button class="ui button">Submit</button>
       </form>
