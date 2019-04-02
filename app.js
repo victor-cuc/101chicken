@@ -48,6 +48,7 @@ app.use(indexRoutes);
 app.use('/shops', shopRoutes);
 app.use("/shops/:id/reviews", reviewRoutes);
 
-app.listen(3000, () => {
-	console.log('SERVER STARTED');
+var port = process.env.PORT || 3000;
+app.listen(port, function () {
+		console.log("The YelpCamp Server Has Started!");
 });
